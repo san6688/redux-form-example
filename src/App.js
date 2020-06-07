@@ -1,24 +1,18 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import ContactReactForm from './ContactReactForm';
+import ContactReduxForm from './ContactReduxForm';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="container">
+        <h4 className="title is-4">Contact Form</h4>
+        <ContactReactForm />
+        <h4 className="title is-4">Contact Redux Form</h4>
+        <ContactReduxForm onSubmit={(values) => alert(JSON.stringify(values))}/>
+      </div>
     </div>
   );
 }
