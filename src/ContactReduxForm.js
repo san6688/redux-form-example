@@ -1,31 +1,35 @@
 import React from 'react';
 import {Field, reduxForm } from 'redux-form';
+import InputWithLabel from './InputWithLabel';
+
+const validate = (val) => {
+  const errors = {};
+  if(!val.firstName){    
+    errors.firstName = 'First Name is Required';
+  }
+
+  if(!val.lastName){    
+    errors.lastName = 'Last Name is Required';
+  }
+
+  if(!val.userEmail){    
+    errors.userEmail = 'Email is Required';
+  }
+
+  return errors;
+}
 
 const ContactReduxForm = (props) => {
-  const { handleSubmit } = props;
+  const { handleSubmit, valid } = props;  
   return (
     <form className="form" onSubmit={handleSubmit}>
-      <div className="field">
-          <div className="control">
-            <label className="label">First Name</label>            
-            <Field className="input" name="firstName" type="text" component="input"></Field>
-          </div>
-      </div>
-      <div className="field">
-      <div className="control">
-            <label className="label">Last Name</label>
-            <Field className="input" name="lastName" type="text" component="input"></Field>
-          </div>
-      </div>
-      <div className="field">
-      <div className="control">
-            <label className="label">Email</label>
-            <Field className="input" name="userEmail" type="text" component="input"></Field>
-          </div>
-      </div>
+      <Field name="firstName" type="text" label="First Name" component={InputWithLabel}></Field>
+      <Field name="lastName" type="text" label="Last Name" component={InputWithLabel}></Field>
+      <Field name="userEmail" type="text" label="Email" component={InputWithLabel}></Field>
+      
       <div className="field">
         <div className='control'>
-          <button className="button" type="submit">Submit</button>
+          <button className="button is-link" type="submit" disabled={!valid}>Submit</button>
         </div>
       </div>
     </form>
@@ -34,4 +38,5 @@ const ContactReduxForm = (props) => {
 
 export default reduxForm({
   form: 'myContactForm',
+  validate,
 })(ContactReduxForm);
