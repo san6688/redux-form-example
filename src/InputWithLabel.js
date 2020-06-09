@@ -4,8 +4,8 @@ const InputWithLabel = (props) => {
   const { label, type, input, meta: {touched, error} } = props;
   return (
     <div className="field">
-      <div className="control">
-            <label className="label">{label}</label>
+      <label className="control label">{label}</label>
+      <div className="control">            
             <input className={`input ${touched && error ? 'is-danger' : ''}`} type={type} {...input}/>
             { touched && <p className="help is-danger">{error}</p>}
       </div>
